@@ -22,7 +22,7 @@
             <strong>{{mo.title}}</strong>
             <span class="fa fa-clock-o"></span> {{wh.dateg(mo.date,'%d/%m %H:%M')}} UTC</span>
             <span class="pull-right">
-%if u.root:
+%if u and u.root:
 <a href="/del/{{mo.mid}}" title="Удалить сообщение" style="color:red">x</a>
 %end
             <strong title="{{mo.addr}}">{{mo.msgfrom}}</strong> to {{mo.msgto}} //
