@@ -12,6 +12,7 @@
     <div class="row"><div class="small-12 columns">
 
 %for n in msgs.split(':'):
+%if n in lst:
 %mo = lst[n]
 
 <br />
@@ -33,6 +34,10 @@
             <p>{{! wh.rend(mo.txt) }}</p>
         </div>
 
+%else:
+<br />
+<div class="alert callout">Сообщение {{n}} удалено или находится вне зоны обслуживания</div>
+%end
 %end
 
 
