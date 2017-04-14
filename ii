@@ -1,0 +1,3 @@
+# python -B iifetch.py gk11.ru std.club obsd.11
+
+python -B iifetch.py ii.club.syscall.ru/lim/1000 std.club
