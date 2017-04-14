@@ -36,8 +36,6 @@ def check_title(s):
 def add_to_topic(s,mid):
     th = dbj.hsh2(s)
     tp = '%s/topic-%s' % (conf.DATA, th)
-    print os.path.exists(tp)
     if not os.path.exists(tp):
-        print s
         open(tp, 'a').write(s + '\n')
     open(tp, 'a').write(mid + '\n')
