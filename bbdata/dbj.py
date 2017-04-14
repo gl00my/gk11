@@ -70,6 +70,9 @@ def save_msg(jd):
     msgid = hsh(bb_transform(jd,60))
     if check_title(jd.title):
         add_to_topic(check_title(jd.title), msgid)
+    if '\n@@@@base64@@@@\n' in jd.txt:
+        nw = jd.txt.split('\n@@@@base64@@@@\n',1)
+        jd.txt = nw[0] + '\n> spoiler!\n' + nw[1].encode('base64')
     ji = mydict(mid=msgid,**jd)
     msg.save(msg(**ji))
 
