@@ -179,7 +179,7 @@ def url_req(kv):
             o = bb_transform(n)
             dfo[n.mid] = o if kv.fmt == 'flat' or kv.fmt == 'flatm' else base64.b64encode(o.encode('utf-8'))
         for sl in kv.msgs.split(':'):
-            fmtstr = dfo[sl] if kv.fmt == 'flatm' else '%s:%s' % (sl, dfo[sl]) if kv.fmt == 'flat' else '== %s ==\n%s\n\n' % (sl,dfo[sl])
+            fmtstr = dfo[sl] if kv.fmt == 'flatm' else '== %s ==\n%s\n\n' % (sl,dfo[sl]) if kv.fmt == 'flat' else  '%s:%s' % (sl, dfo[sl])
             out.append (fmtstr)
     return '\n'.join(out) + '\n'
 
