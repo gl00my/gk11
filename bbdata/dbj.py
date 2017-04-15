@@ -3,6 +3,7 @@
 import hashlib
 from mydict import mydict
 import base64
+from textwrap import wrap
 from libz.peewee import Model, TextField, CharField, IntegerField
 import time
 import conf
@@ -72,7 +73,7 @@ def save_msg(jd):
         add_to_topic(check_title(jd.title), msgid)
     if '\n@@@@base64@@@@\n' in jd.txt:
         nw = jd.txt.split('\n@@@@base64@@@@\n',1)
-        jd.txt = nw[0] + '\n> spoiler!\n' + nw[1].encode('base64')
+        jd.txt = nw[0] + '\n> spoiler!\n' + '\n'.join(wrap(base64.urlsafe_b64encode(nw[1]),50))
     ji = mydict(mid=msgid,**jd)
     msg.save(msg(**ji))
 
