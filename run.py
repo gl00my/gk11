@@ -155,7 +155,13 @@ def show_msgid(msgs):
 @bosfor.post('/a/savemsg/<ea>')
 def post_user(ea):
     if request.forms.outtxt:
-        app_rq('point/user/ea/%s' % ea, request.forms)
+        data = mydict(request.forms)
+        uu = userbb.check_auth(data.uhash)
+        if uu:
+            data.update(uname=uu.uname.encode('utf-8'),addr='%s,%s' % (conf.STREET, uu.id))
+        else:
+            return 'no hash - no msg'
+        app_rq('point/user/ea/%s' % ea, data)
     redirect(request.forms.beback or '/:%s' % ea)
 
 

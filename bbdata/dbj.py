@@ -55,7 +55,6 @@ class msg(Model):
 
 def bb_transform(o,sep=1):
     ''' transofm db object to bb msg '''
-    print o
     repto = '/repto/%s' % o.repto if o.repto else ''
     return 'ii/ok%s\n%s\n%s\n%s\n%s\n%s\n%s\n\n%s' % (repto, o.echoarea, o.date // sep, o.msgfrom, o.addr, o.msgto, o.title, o.txt)
 
@@ -217,7 +216,6 @@ def point_msg(pauth,tmsg,uu):
     if not uu:
         return False
     msgfrom = uu.uname.encode('utf-8')
-    addr = 'gk,11'
     tnew = tmsg.strip().replace('-','+').replace('_','/')
     tlines = base64.b64decode( tnew )
     lines = tlines.splitlines()
@@ -225,7 +223,7 @@ def point_msg(pauth,tmsg,uu):
     mo = mydict(date=gts(),
                 accepted=gts(),
                 msgfrom=msgfrom,
-                addr=addr,
+                addr='%s,%s' % (conf.STREET, uu.id),
                 echoarea=echoarea,
                 msgto=lines[1],
                 title=lines[2] or '***',

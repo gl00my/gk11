@@ -24,14 +24,13 @@ def app_rq(s, data=mydict(), rf=get_pass):
         txt = data.outtxt or kv.txt
         t = (ea,msgto,title,repto,txt.replace('\r\n','\n'))
         tb = '%s\n%s\n%s\n%s\n\n%s' % t
-        bb_sendmsg(data.msgfrom.encode('utf-8'), 'gk,11', tb.encode('utf-8').splitlines())
+        bb_sendmsg(data.uname, data.addr, tb.splitlines())
         return 'msg ok:'
     else:
         return rf(kv)
 
 def app_rq_txt(s, data=mydict()):
     ''' convert db to plain text '''
-    print s
     kv = _mkkv(s)
     out = '%s\n' % gts() if kv.appendts else ''
     outrq = app_rq(s,data,url_req)

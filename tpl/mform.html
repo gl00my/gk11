@@ -31,7 +31,7 @@
 
 <form class="form-horizontal" role="form" method="post" enctype="multipart/form-data" action="/a/savemsg/{{ea}}">
         <input type="hidden" name="repto" value="{{repto}}" />
-        <input type="hidden" name="msgfrom" value="{{u.uname}}" />
+        <input type="hidden" name="uhash" value="{{u.uhash}}" />
 %shownow = True if SM == 'always' else True if (not repto and SM == 'newmsg') else False
 %if shownow:
         <input type="text" name="msgto" value="{{rmsg.msgfrom if repto else 'All'}}" class="form-control" placeholder="Кому"/>
