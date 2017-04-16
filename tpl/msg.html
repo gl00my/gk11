@@ -5,6 +5,12 @@
 <div class="row">
     <div class="small-12 columns">
         <a href="/" title="Стартовая страница" class="secondary button"><i class="fa fa-home"></i> Стартовая страница</a>
+%if get('ea'):
+<span class="pull-right">
+        <a href="/reply/{{ea}}/-?tn=%23%23%20{{tn}}%20%23%23" class="alert button">Написать в топик</a>
+</span>
+%end
+
     </div>
 </div>
 

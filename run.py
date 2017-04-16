@@ -114,11 +114,15 @@ def bb_api(bb):
 @bosfor.route('/topic/<tid>')
 def show_topic(tid):
     msgs, deftitle = topic.get_topic(tid, request.query.flag)
+    try:
+        ea = dbj.msg.get(dbj.msg.mid== msgs.split(':')[0]).echoarea
+    except:
+        ea = ''
     lrq = app_rq('msgs/%s' % msgs)
     lst = mydict()
     for n in lrq:
         lst[n.mid] = mydict(n._data)
-    return template('tpl/msg.html', msgs=msgs, lst=lst, u=get_u(), deftitle=u'Topic: %s' % deftitle)
+    return template('tpl/msg.html', msgs=msgs, lst=lst, u=get_u(), deftitle=u'Topic: %s' % deftitle, ea=ea, tn=deftitle)
 
 @bosfor.route('/del/<mid>')
 def del_mid(mid):
@@ -162,7 +166,7 @@ def reply_to(ea, repto):
         redirect('/user/me?redir=/reply/%s/%s' % (ea, repto))
     rep = repto if repto != '-' else ''
     rmsg = app_rq('msgs/%s/fmt/noempty' % rep)
-    return template('tpl/mform.html', rmsg=rmsg, ea=ea, repto=rep, u=u)
+    return template('tpl/mform.html', rmsg=rmsg, ea=ea, repto=rep, u=u, zo=request.query.tn)
 
 
 @bosfor.route('/q/<msgs:path>')
