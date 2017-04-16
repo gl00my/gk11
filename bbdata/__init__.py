@@ -36,7 +36,7 @@ def app_rq_txt(s, data=mydict()):
     outrq = app_rq(s,data,url_req)
     if kv.echolist:
         if kv.cnt:
-            out += '\n'.join(['%s:%s:' % n for n in outrq]) + '\n'
+            out += '\n'.join(['%s:%s:%s' % (n[0], n[1], n[0]) for n in outrq]) + '\n'
         else:
             out += '\n'.join(outrq) + '\n'
     else:
