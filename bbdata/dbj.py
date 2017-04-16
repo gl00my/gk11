@@ -132,6 +132,8 @@ def get_pass(kv):
         cur = cur.where(msg.date >= int(kv.dfrom))
     if kv.dto:
         cur = cur.where(msg.date <= int(kv.dto))
+    if kv.noecho:
+        cur = cur.where(msg.echoarea.not_in( kv.noecho.split(':') ))
     if kv.lim or kv.page:
         # add .intrev, for revert object (not request)
         page = int(kv.page) if kv.page else 1
