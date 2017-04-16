@@ -20,6 +20,25 @@ def get_u():
 def bb_index():
     return template('tpl/index.html', u=get_u())
 
+@bosfor.route(['/ecfg','/ecfg/<ss:int>'])
+def ecfg_index(ss=0):
+    uu=get_u()
+    if not uu or not uu.root:
+        return 'no access'
+    try:
+        txt = open('subs%s.lst' % ss).read()
+    except:
+        txt = ''
+    return template('<form method="POST"><input type="hidden" name="uhash" value="{{uu.uhash}}" /><input type="text" name="txt" value="{{txt}}" style="width:100%" /><input type="submit" value="Save" /> {{txt}} </form>',txt=txt,uu=uu)
+
+@bosfor.post(['/ecfg','/ecfg/<ss:int>'])
+def ecfg_save(ss=0):
+    uu = userbb.check_auth(request.forms.uhash)
+    if not uu or not uu.root:
+        return 'no access'
+    open('subs%s.lst' % ss,'w').write(request.forms.txt)
+    redirect('/ecfg' if ss == 0 else '/ecfg/%s' % ss)
+
 @bosfor.route('/list.txt')
 @bosfor.route('/<kv:path>/list.txt')
 def list_txt(kv=''):
