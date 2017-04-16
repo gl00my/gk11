@@ -152,7 +152,7 @@ def url_req(kv):
 #        order = msg.id
 #    else:
     order = msg.id.desc()
-    if kv.msgs:
+    if kv.msgs or kv.flatecho:
         cur = msg.select().order_by(order)
     elif kv.withecho:
         cur = msg.select(msg.mid,msg.echoarea).order_by(order)
@@ -169,7 +169,12 @@ def url_req(kv):
         lim = int(kv.lim) if kv.lim else 100
         cur = cur.paginate(page,lim)
     # msgs or not msgs? vot v chem vopros
-    if not kv.msgs:
+    if kv.flatecho:
+        cur = cur.where(msg.echoarea == kv.flatecho).limit(200)
+        for n in cur:
+            o = bb_transform(n)
+            out.append( '== %s ==\n%s\n\n' % (n.mid,o) )
+    elif not kv.msgs:
         if kv.echo:
             cur = cur.where(msg.echoarea << kv.echo.split(':'))
         if kv.withecho:
