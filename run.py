@@ -133,6 +133,8 @@ def del_mid(mid):
 def show_echoarea(ea, opts=''):
     if ea == 'besedka':
         ea = 'besedka.11'
+    if not '.' in ea:
+        abort(418)
     opts = opts.split(',') + ['', '', '']
     lim, page, rev = '/lim/100', '', ''
     pg = 1
