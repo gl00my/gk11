@@ -12,7 +12,7 @@
     <link rel="icon" type="image/png" href="/s/favicon.png" />
 %if request.cookies.bg != 'no':
     <style>
-        body {background: url(/s/girl1.jpg) no-repeat; background-size: cover; background-attachment: fixed; }
+        body {background: url(/s/varyag.jpg) no-repeat; background-size: cover; background-attachment: fixed; }
     </style>
 %end
   </head>
