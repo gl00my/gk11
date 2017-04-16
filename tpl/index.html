@@ -12,16 +12,8 @@
 <div class="large-8 medium-9 small-12 columns">
 <br />
 
-%HL = ':'.join(open('%s/hidden.txt' % conf.DATA).read().splitlines())
-
-%if HL:
-%arq = 'afrom/%s/lim/50/noecho/%s' % (gts() - 259200, HL)
-%else:
-%arq = 'afrom/%s/lim/50' % (gts() - 259200)
-%end
-%print arq
-
-%for mo in app_rq(arq):
+%HL = ':'.join(open('%s/hidden.txt' % conf.DATA).read().split())
+%for mo in app_rq('afrom/%s/lim/50/noecho/%s' % (gts() - 259200, HL)):
 
     <a style="margin-bottom: 2px" class="secondary button" href="/:{{mo.echoarea}}"><strong>:{{mo.echoarea}}</strong>    <!-- len --></a>
     <a style="margin-bottom: 2px" class="secondary button float-right" href="/reply/{{mo.echoarea}}/{{mo.mid}}" title="Ответить на это сообщение"><i class="fa fa-reply"> ответить</i></a>
