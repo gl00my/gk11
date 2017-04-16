@@ -7,6 +7,7 @@ from libz.bottle import Bottle, static_file, request, response, template, redire
 from bbdata import app_rq, app_rq_txt, mydict, jout, dbj, topic
 import userbb
 import conf
+import wh
 
 bosfor = Bottle()
 SimpleTemplate.defaults['request'] = request
@@ -237,6 +238,26 @@ def show_carbon(carbon):
 def rss_for_carbon(carbon):
     response.set_header('content-type','application/rss+xml; charset=utf-8')
     return userbb.rss_carbon(carbon)
+
+
+@bosfor.route('/query')
+def show_rq():
+    rq=request.query
+    cur = []
+    if rq:
+        cur=dbj.msg().select()
+        if rq.dfrom:
+            cur = cur.where(dbj.msg.date >= wh.ts_get(rq.dfrom + ' 00:00:00'))
+        if rq.dto:
+            cur = cur.where(dbj.msg.date <= wh.ts_get(rq.dto + ' 23:59:59'))
+        if rq.msgfrom:
+            cur = cur.where(dbj.msg.msgfrom == rq.msgfrom)
+        if rq.msgto:
+            cur = cur.where(dbj.msg.msgto == rq.msgto)
+        if rq.ea:
+            cur = cur.where(dbj.msg.echoarea << rq.ea.split())
+        cur=cur.limit(400)
+    return template('tpl/query.html', lst=cur, cnt=cur.count() if cur else 0,rq=rq)
 
 
 @bosfor.route('/lite/<ea>')
