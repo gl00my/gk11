@@ -3,7 +3,7 @@
 import os
 #os.environ['TZ'] = 'Asia/Vladivostok'
 
-from libz.bottle import Bottle, static_file, request, response, template, redirect, SimpleTemplate
+from libz.bottle import Bottle, static_file, request, response, template, redirect, SimpleTemplate, abort
 from bbdata import app_rq, app_rq_txt, mydict, jout, dbj, topic
 import userbb
 import conf
