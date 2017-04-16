@@ -67,6 +67,8 @@ def echo_count(ea):
 def save_msg(jd):
     ''' save bbmsg to db '''
     #print jd
+    if not '.' in jd.echoarea:
+        return
     msgid = hsh(bb_transform(jd,60))
     if check_title(jd.title):
         add_to_topic(check_title(jd.title), msgid)
