@@ -241,7 +241,7 @@ def point_msg(pauth,tmsg,uu):
     if mo.txt.startswith('@repto:'):
         tmpmsg = mo.txt.splitlines()
         mo.repto = tmpmsg[0][7:]
-        mo.repto = mo.repto[:8]
+        mo.repto = mo.repto[:20]
         mo.txt = '\n'.join(tmpmsg[1:])
     save_msg(mo)
     return 'msg ok:'
