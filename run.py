@@ -131,6 +131,8 @@ def del_mid(mid):
 
 @bosfor.route(['/l/<ea>', '/\:<ea>', '/l/<ea>/<opts>'])
 def show_echoarea(ea, opts=''):
+    if ea == 'besedka':
+        ea = 'besedka.11'
     opts = opts.split(',') + ['', '', '']
     lim, page, rev = '/lim/100', '', ''
     pg = 1
