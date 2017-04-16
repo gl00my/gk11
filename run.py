@@ -165,7 +165,11 @@ def reply_to(ea, repto):
     if not u:
         redirect('/user/me?redir=/reply/%s/%s' % (ea, repto))
     rep = repto if repto != '-' else ''
-    rmsg = app_rq('msgs/%s/fmt/noempty' % rep)
+    if rep:
+        # fix msgs// !
+        rmsg = app_rq('msgs/%s/fmt/noempty' % rep)
+    else:
+        rmsg = mydict()
     return template('tpl/mform.html', rmsg=rmsg, ea=ea, repto=rep, u=u, zo=request.query.tn)
 
 

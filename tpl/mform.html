@@ -18,11 +18,10 @@
 
 <div class="row"><div class="large-12 columns">
 
-%zubj = 'Re: %s' % rmsg.title if repto else zo if get('zo') else ''
+%zubj = zo if get('zo') else 'Re: %s' % rmsg.title if repto else ''
 %if zubj and rmsg.title.startswith('Re: '):
 %zubj = rmsg.title
 %end
-
 
 %if repto:
 <div class="callout">{{! rend(rmsg.txt) }}</div>
