@@ -64,7 +64,7 @@ def x_c(f,kv=''):
 @bosfor.route('/<kv:path>/x/feaures')
 def xfeat_txt(kv=''):
     response.set_header('content-type', 'text/plain; charset=utf-8')
-    return 'x/c\nlist.txt\nblacklist.txt\n#gk11#101'
+    return 'x/c\nlist.txt\nblacklist.txt\n#gk11#102'
 
 
 @bosfor.route('/blacklist.txt')
@@ -137,10 +137,8 @@ def del_mid(mid):
 
 @bosfor.route(['/l/<ea>', '/\:<ea>', '/l/<ea>/<opts>'])
 def show_echoarea(ea, opts=''):
-    if ea == 'besedka':
-        ea = 'besedka.11'
     if not '.' in ea:
-        abort(418)
+        ea += '.11'
     opts = opts.split(',') + ['', '', '']
     lim, page, rev = '/lim/100', '', ''
     pg = 1
