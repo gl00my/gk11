@@ -15,6 +15,7 @@
         <div class="callout">
             <p>authstr: <strong>{{u.uhash}}</strong></p>
             <p>Ответы вам: <a href="/for/{{u.uname}}">/for/{{u.uname}}</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RSS ответов вам: <a href="/rssfor/{{u.uname}}">/rssfor/{{u.uname}}</a></p>
+            <p><a href="/query">Выборка по разным критериям (юзеры, даты, эхи)</a></p>
             <p>lite-версии отображения эх:
 %for n in open('%s/public.txt' % conf.DATA).read().splitlines():
 <a href="/lite/{{n}}">:{{n}}</a>
