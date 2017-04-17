@@ -5,6 +5,7 @@ import os
 
 from libz.bottle import Bottle, static_file, request, response, template, redirect, SimpleTemplate, abort
 from bbdata import app_rq, app_rq_txt, mydict, jout, dbj, topic
+from libz.peewee import fn
 import userbb
 import conf
 import wh
@@ -258,6 +259,12 @@ def show_rq():
             cur = cur.where(dbj.msg.echoarea << rq.ea.split())
         cur=cur.limit(400)
     return template('tpl/query.html', lst=cur, cnt=cur.count() if cur else 0,rq=rq)
+
+
+@bosfor.route('/authors')
+def show_authors():
+    query = dbj.msg.select(dbj.msg.msgfrom,fn.COUNT(dbj.msg.msgfrom).alias('cnt')).group_by(dbj.msg.msgfrom).order_by(fn.COUNT(dbj.msg.msgfrom).desc())
+    return template('tpl/authors.html',query=query)
 
 
 @bosfor.route('/lite/<ea>')
