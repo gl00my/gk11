@@ -64,7 +64,7 @@ def x_c(f,kv=''):
 @bosfor.route('/<kv:path>/x/feaures')
 def xfeat_txt(kv=''):
     response.set_header('content-type', 'text/plain; charset=utf-8')
-    return 'x/c\nlist.txt\nblacklist.txt\n'
+    return 'x/c\nlist.txt\nblacklist.txt\n#gk11#100'
 
 
 @bosfor.route('/blacklist.txt')
