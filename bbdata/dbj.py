@@ -245,3 +245,13 @@ def point_msg(pauth,tmsg,uu):
         mo.txt = '\n'.join(tmpmsg[1:])
     save_msg(mo)
     return 'msg ok:'
+
+def get_short(s):
+    txt = open('%s/short.txt' % conf.DATA).read().splitlines()
+    for n in txt:
+        t = n.split()
+        if t[0] == s:
+            return t[1]
+
+def set_short(n,s):
+    open('%s/short.txt' % conf.DATA,'a').write('%s %s\n' % (n,s))

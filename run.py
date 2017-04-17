@@ -64,7 +64,7 @@ def x_c(f,kv=''):
 @bosfor.route('/<kv:path>/x/feaures')
 def xfeat_txt(kv=''):
     response.set_header('content-type', 'text/plain; charset=utf-8')
-    return 'x/c\nlist.txt\nblacklist.txt\n#gk11#100'
+    return 'x/c\nlist.txt\nblacklist.txt\n#gk11#101'
 
 
 @bosfor.route('/blacklist.txt')
@@ -309,5 +309,23 @@ def json_ret(k,v):
 def new_style(filename):
     return static_file(filename, root='./s')
 
+
+@bosfor.route('/_<shortlink>')
+def short_link(shortlink):
+    shl = dbj.get_short(shortlink)
+    if not shl:
+        return('<form method="POST"><input type="text" name="shl" style="width:100%" /><input type="submit" value="Save" /></form>')
+    redirect ('/q/%s' % shl)
+
+
+@bosfor.post('/_<shortlink>')
+def set_link(shortlink):
+    shl = request.forms.shl.split()
+    for n in shl:
+        if len(n) != 20:
+            return 'wrong %s' % n
+    shl = '/'.join(shl)
+    dbj.set_short(shortlink,shl)
+    redirect ('/q/%s' % shl)
 
 bosfor.run(host=conf.BIND, port=15555, debug=True)
